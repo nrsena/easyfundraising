@@ -1,7 +1,6 @@
 package com.easyFundraising.step_definitions;
 
 import com.easyFundraising.pages.FindACause;
-import com.easyFundraising.utilities.BrowserUtils;
 import com.easyFundraising.utilities.ConfigurationReader;
 import com.easyFundraising.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -16,6 +15,7 @@ public class simpleSearchStepDef {
 
     FindACause findACause = new FindACause();
     String thirdSuggestion;
+
 
 
     @Given("User is on easyfundraising home page")
@@ -51,14 +51,15 @@ public class simpleSearchStepDef {
 
         thirdSuggestion = findACause.suggestions.get(2).getText();
 
+
         try{
             findACause.suggestions.get(2).click();
         } catch (Exception e){
             System.out.println("Suggestion list is shorter than 3");
         }
 
-
     }
+
 
     @When("User clicks the search cause button")
     public void user_clicks_the_search_cause_button() {
@@ -75,16 +76,18 @@ public class simpleSearchStepDef {
         for (WebElement searchResult : findACause.searchResults) {
 
             if (searchResult.getText().equalsIgnoreCase(thirdSuggestion)) {
-                System.out.println("3rd Cause exists in the Search results");
-                Assert.assertTrue(searchResult.getText().equalsIgnoreCase(thirdSuggestion));
                 exists = true;
+                break;
+
             } else{
                 exists= false;
             }
 
         }
 
-        if (!exists) {
+        if (exists) {
+            System.out.println("3rd Cause exists in the Search results");
+        }else{
             System.out.println("3rd Cause doesn't exists in the Search results");
         }
 
@@ -103,4 +106,6 @@ public class simpleSearchStepDef {
 
         Assert.assertTrue(findACause.searchForCauseError.isDisplayed());
     }
+
+
 }

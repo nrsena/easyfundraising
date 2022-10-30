@@ -14,13 +14,13 @@ Feature: Find a Cause Search functionality and verification
   #positive scenario with different valid datas by using Scenario Outline:
   Scenario Outline: Find a Cause Search Functionality
 
-    When User types "<thirdCharacter>" characters in the search bar
+    When User types "<threeCharacter>" characters in the search bar
     And User selects the third cause from the suggestion list
     And User clicks the search cause button
     Then User sees selected cause exists in the search result
 
     Examples:
-      | thirdCharacter |
+      | threeCharacter |
       | 1st            |
       | set            |
       | tak            |
@@ -28,12 +28,12 @@ Feature: Find a Cause Search functionality and verification
 
     #negative scenario with invalid datas
   Scenario Outline: Find a Cause Search Functionality
-    When User types "<thirdCharacter>" characters in the search bar
+    When User types "<threeCharacter>" characters in the search bar
     And User clicks the search cause button
     Then User sees -We didn't find any causes matching your search- message on the page
 
     Examples:
-      | thirdCharacter |
+      | threeCharacter |
       | 3tk            |
       | @£$            |
 
