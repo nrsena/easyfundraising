@@ -1,4 +1,4 @@
-Feature: Search functionality and verification
+Feature: Find a Cause Search functionality and verification
   User story:
   Open the website- https://www.easyfundraising.org.uk/
   Go to the link ‘Find a Cause’ on the top of the page
@@ -6,13 +6,41 @@ Feature: Search functionality and verification
   Click Search cause
   Confirm with a message that the selected 3rd Cause exists in the Search results
 
-
-  Scenario: Find a cause Search Functionality Verification
+  Background:
     Given User is on easyfundraising home page
     When User clicks the Find a Cause on top of the page
     And User clicks the search bar
-    When User types "aaa" characters in the search bar
+
+  #positive scenario with different valid datas by using Scenario Outline:
+  Scenario Outline: Find a Cause Search Functionality
+
+    When User types "<thirdCharacter>" characters in the search bar
     And User selects the third cause from the suggestion list
     And User clicks the search cause button
     Then User sees selected cause exists in the search result
+
+    Examples:
+      | thirdCharacter |
+      | 1st            |
+      | set            |
+      | tak            |
+      | 126            |
+
+    #negative scenario with invalid datas
+  Scenario Outline: Find a Cause Search Functionality
+    When User types "<thirdCharacter>" characters in the search bar
+    And User clicks the search cause button
+    Then User sees -We didn't find any causes matching your search- message on the page
+
+    Examples:
+      | thirdCharacter |
+      | 3tk            |
+      | @£$            |
+
+
+
+   #negative scenario with invalid action
+  Scenario: Find a Cause Search Functionality
+    When User clicks the search cause button
+    Then User sees -To search for a cause, enter a cause name- error
 

@@ -20,11 +20,20 @@ public class FindACause extends BasePage {
     @FindBy(id = "sagc-hero-search-submit")
     public WebElement searchButton;
 
+    @FindBy(xpath = "//ul[@id='sagc-hero-search-input-auto-suggest']")
+    public WebElement suggestionList;
+
     @FindBy(className = "style_suggestionBtn__47Wy4")
     public List<WebElement> suggestions;
 
     @FindBy(xpath = "//p[@class='style_title__1XLVx']")
     public List<WebElement> searchResults;
+
+    @FindBy(xpath = "//h1[@class='mb-4 pb-0 typography-xl font-base']")
+    public WebElement noMatchingCauseText;
+
+    @FindBy(xpath = "//p[@class='text-v2-semantic-error-primary p-0 m-0']")
+    public WebElement searchForCauseError;
 
 
 
